@@ -1,8 +1,5 @@
-mamanagement:
+management:
   endpoints:
     web:
       exposure:
         include: "*"
-  info:
-    git:
-      mode: "full"
