@@ -1,4 +1,4 @@
-package me.developery.acturator_study;
+package me.developery.acturator_study.timer;
 
 import io.micrometer.core.instrument.FunctionTimer;
 import io.micrometer.core.instrument.MeterRegistry;

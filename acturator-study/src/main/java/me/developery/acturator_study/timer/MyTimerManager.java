@@ -1,4 +1,4 @@
-package me.developery.acturator_study;
+package me.developery.acturator_study.timer;
 
 import org.springframework.stereotype.Service;
 
