@@ -1,14 +1,22 @@
 package me.developery.acturator_study;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Endpoint(id = "myLibraryInfo")
 public class MyLibraryInfoEndpoint {
+
+    @WriteOperation
+    public void changeSomething(String name, boolean enableSomething){
+        log.info("name: {}, enableSomething: {}", name, enableSomething);
+    }
 
     @ReadOperation //read 요청에 대한 메서드
     public List<LibraryInfo> getLibraryInfos(@Nullable String name, boolean includeVersion){
