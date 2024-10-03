@@ -2,6 +2,7 @@ package me.developery.acturator_study;
 
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
+import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 public class MyLibraryInfoEndpoint {
 
     @ReadOperation //read 요청에 대한 메서드
-    public List<LibraryInfo> getLibraryInfos(){
+    public List<LibraryInfo> getLibraryInfos(@Nullable String name, boolean includeVersion){
         //TODO: 라이브러리 정보를 읽어서 name, version을 가져오는 코드가 있어야 하나 하드코딩으로 대체
         LibraryInfo libraryInfo1 = new LibraryInfo();
         libraryInfo1.setName("logback");
@@ -20,6 +21,25 @@ public class MyLibraryInfoEndpoint {
         libraryInfo2.setName("jackson");
         libraryInfo2.setVersion("2.0.0");
 
-        return Arrays.asList(libraryInfo1, libraryInfo2);
+        List<LibraryInfo> resultList = Arrays.asList(libraryInfo1, libraryInfo2);
+
+        if(name != null){
+            resultList = resultList.stream()
+                    .filter(libraryInfo -> {
+                        return libraryInfo.getName().equals(name);
+                    })
+                    .toList();
+        }
+        if(includeVersion == false){
+            resultList = resultList.stream()
+                    .map(libraryInfo -> {
+                        LibraryInfo simpleInfo = new LibraryInfo();
+                        simpleInfo.setName(libraryInfo.getName());
+                        // version 정보는 포함하지 않음
+                        return simpleInfo;
+                    })
+                    .toList();
+        }
+        return resultList;
     }
 }
