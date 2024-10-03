@@ -3,3 +3,9 @@ management:
     web:
       exposure:
         include: "*"
+spring:
+  boot:
+    admin:
+      client:
+        url:
+          - http://127.0.0.1:9090  # spring boot admin ??? ip, port ??
